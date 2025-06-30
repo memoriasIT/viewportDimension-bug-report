@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// --- Router Configuration ---
-
-// Define the sections data at a top level to be accessible by the router.
+// Demo Sections
 final List<TabSection> _sections = [
   TabSection(
     title: 'Hello',
@@ -17,9 +15,8 @@ final List<TabSection> _sections = [
   ),
 ];
 
-// Configure the router with the specified routes.
 final GoRouter _router = GoRouter(
-  initialLocation: '/tab/hello', // Set a default route.
+  initialLocation: '/tab/hello',
   routes: <RouteBase>[
     GoRoute(
       path: '/tab/:tabId',
@@ -36,7 +33,6 @@ final GoRouter _router = GoRouter(
         );
       },
       routes: <RouteBase>[
-        // Nested route for the detail page.
         GoRoute(
           path: 'detail/:detailId',
           builder: (BuildContext context, GoRouterState state) {
@@ -105,7 +101,7 @@ class DetailPage extends StatelessWidget {
   }
 }
 
-// --- Modified and Existing Widgets ---
+// --- Tab View ---
 
 class NewsContentLoaded extends StatefulWidget {
   const NewsContentLoaded({
@@ -141,7 +137,6 @@ class NewsContentLoadedState extends State<NewsContentLoaded> with TickerProvide
       vsync: this,
       onTabChangeCallback: (index) async {
         final tab = widget.sections[index];
-        // The onTabChanged callback will now trigger the route change.
         widget.onTabChanged(tab.id);
       },
     );
@@ -153,11 +148,6 @@ class NewsContentLoadedState extends State<NewsContentLoaded> with TickerProvide
 
     final controller = _tabController;
     if (controller == null) return;
-
-    if (widget.sections.length != oldWidget.sections.length) {
-      _tabController?.dispose();
-      _initTabController();
-    }
 
     final tabIndex = getTabIndex();
     if (widget.tabSection != null && (oldWidget.tabSection != widget.tabSection || controller.index != tabIndex)) {
@@ -193,10 +183,7 @@ class NewsContentLoadedState extends State<NewsContentLoaded> with TickerProvide
               child: CustomTabBar(
                 controller: _tabController!,
                 sections: widget.sections,
-                onTabChange: (index) {
-                  // The onTabChangeCallback in the controller handles the logic.
-                  // This could be used for other side effects if needed.
-                },
+                onTabChange: (index) {},
               ),
             ),
             Expanded(
@@ -205,7 +192,6 @@ class NewsContentLoadedState extends State<NewsContentLoaded> with TickerProvide
                 child: TabBarView(
                   controller: _tabController,
                   children: widget.sections.map((tab) {
-                    // Added a button to navigate to the detail page.
                     return Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -214,7 +200,6 @@ class NewsContentLoadedState extends State<NewsContentLoaded> with TickerProvide
                           const SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () {
-                              // Navigate to the detail route.
                               context.go('/tab/${tab.id}/detail/1');
                             },
                             child: const Text('Open Detail'),
