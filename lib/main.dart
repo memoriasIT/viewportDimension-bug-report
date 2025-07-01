@@ -162,7 +162,7 @@ class NewsContentLoadedState extends State<NewsContentLoaded> with TickerProvide
 
   void _initTabController() {
     _tabController = CustomTabController(
-      initialIndex: getTabIndex(),
+      initialIndex: 5,
       length: widget.sections.length,
       vsync: this,
       onTabChangeCallback: (index) async {
@@ -180,23 +180,12 @@ class NewsContentLoadedState extends State<NewsContentLoaded> with TickerProvide
     if (controller == null) return;
 
     controller.animateTo(0);
-    controller.animateTo(widget.sections.length);
+    controller.animateTo(widget.sections.length - 3);
     controller.animateTo(0);
-    controller.animateTo(widget.sections.length);
+    controller.animateTo(widget.sections.length - 3);
     controller.animateTo(0);
-    controller.animateTo(widget.sections.length);
+    controller.animateTo(widget.sections.length - 3);
     controller.animateTo(0);
-
-    //final tabIndex = getTabIndex();
-    //if (widget.tabSection != null && (oldWidget.tabSection != widget.tabSection || controller.index != tabIndex)) {
-    //  controller.index = tabIndex;
-    //}
-  }
-
-  int getTabIndex() {
-    var tabIndex = widget.sections.indexWhere((tab) => tab.id == widget.tabSection);
-    if (tabIndex == -1) tabIndex = 0;
-    return tabIndex;
   }
 
   @override
