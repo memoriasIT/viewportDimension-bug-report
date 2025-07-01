@@ -185,7 +185,6 @@ class NewsContentLoadedState extends State<NewsContentLoaded> with TickerProvide
     controller.animateTo(widget.sections.length - 3);
     controller.animateTo(0);
     controller.animateTo(widget.sections.length - 3);
-    controller.animateTo(0);
   }
 
   @override
