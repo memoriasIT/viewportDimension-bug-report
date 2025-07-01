@@ -13,6 +13,36 @@ final List<TabSection> _sections = [
     id: 'flutter',
     color: Colors.red,
   ),
+  TabSection(
+    title: 'Hello',
+    id: 'a',
+    color: Colors.blue,
+  ),
+  TabSection(
+    title: 'Flutter',
+    id: 'b',
+    color: Colors.red,
+  ),
+  TabSection(
+    title: 'Hello',
+    id: 'c',
+    color: Colors.blue,
+  ),
+  TabSection(
+    title: 'Flutter',
+    id: 'd',
+    color: Colors.red,
+  ),
+  TabSection(
+    title: 'Hello',
+    id: 'e',
+    color: Colors.blue,
+  ),
+  TabSection(
+    title: 'Flutter',
+    id: 'f',
+    color: Colors.red,
+  ),
 ];
 
 final GoRouter _router = GoRouter(
@@ -149,10 +179,18 @@ class NewsContentLoadedState extends State<NewsContentLoaded> with TickerProvide
     final controller = _tabController;
     if (controller == null) return;
 
-    final tabIndex = getTabIndex();
-    if (widget.tabSection != null && (oldWidget.tabSection != widget.tabSection || controller.index != tabIndex)) {
-      controller.index = tabIndex;
-    }
+    controller.animateTo(0);
+    controller.animateTo(widget.sections.length);
+    controller.animateTo(0);
+    controller.animateTo(widget.sections.length);
+    controller.animateTo(0);
+    controller.animateTo(widget.sections.length);
+    controller.animateTo(0);
+
+    //final tabIndex = getTabIndex();
+    //if (widget.tabSection != null && (oldWidget.tabSection != widget.tabSection || controller.index != tabIndex)) {
+    //  controller.index = tabIndex;
+    //}
   }
 
   int getTabIndex() {
